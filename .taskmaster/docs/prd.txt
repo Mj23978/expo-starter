@@ -1,0 +1,35 @@
+<context>
+# Overview
+Our product is a mobile app for tracking daily habits and goals. It helps users build positive routines and track their progress over time. It's valuable for anyone looking to improve their productivity and well-being.
+</context>
+<PRD>
+# Technical Architecture
+We want to use React Native with Expo for the mobile app, convex for authentication and database, and Tailwind CSS for styling with NativeWind 4. We need APIs for user data and habit tracking, and we want to ensure data security with proper authentication and encryption.
+
+# Development Roadmap
+We need to ensure that the backend services are in place before implementing the front-end features that depend on them. We should prioritize the core features first, then add social sharing and analytics as secondary features. The development roadmap should start with user authentication, then habit tracking, followed by goal setting and progress visualization. We want to get to a usable front end as quickly as possible.
+
+# Logical Dependency Chain
+The logical order of development should follow the roadmap, ensuring that foundational features are completed before building upon them. This includes:
+- User authentication
+- Habit tracking
+- Goal setting
+- Progress visualization
+- Social sharing
+- Analytics and insights
+- Push notifications
+
+# Risks and Mitigations
+Potential risks include integrating convex with React Native and ensuring data security for user habits and goals. We'll need to address these with proper authentication and encryption. There's also a risk of user data loss or corruption, which we'll mitigate with regular backups and data recovery procedures.
+
+# Appendix
+## Core Features
+- User authentication
+- Habit tracking
+- Goal setting
+- Progress visualization
+- Reminders
+- Social sharing
+- Analytics and insights
+- Push notifications
+</PRD>
