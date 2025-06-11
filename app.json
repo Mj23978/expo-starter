@@ -2,7 +2,7 @@
   "expo": {
     "jsEngine": "hermes",
     "name": "Todo App",
-    "slug": "todo-app",
+    "slug": "starter-todo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -21,7 +21,8 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.fluttensor.todoapp",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "ExpoLocalization_supportsRTL": true
       }
     },
     "android": {
@@ -58,7 +59,7 @@
       "supportsRTL": true,
       "router": {},
       "eas": {
-        "projectId": "todo-app-project-id"
+        "projectId": "7b584263-fb3a-465e-ba50-78ba68657e8d"
       }
     },
     "owner": "mj23978"
