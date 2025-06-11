@@ -7,6 +7,7 @@ node_modules/
 .expo/
 dist/
 web-build/
+.idea 
 
 # Native
 *.orig.*
@@ -39,27 +40,4 @@ yarn-error.*
 
 expo-env.d.ts
 # @end expo-cli
-
-# Added by Task Master AI
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-dev-debug.log
-# Dependency directories
-# Environment variables
-.env
-# Editor directories and files
-.idea
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-# OS specific
-# Task files
-tasks.json
-tasks/ 
+.idea/workspace.xml

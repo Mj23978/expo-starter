@@ -1,0 +1,53 @@
+{
+	"mcpServers": {
+		"github.com/upstash/context7-mcp": {
+			"command": "cmd",
+			"args": [
+				"/c",
+				"npx",
+				"-y",
+				"@upstash/context7-mcp@latest"
+			],
+			"disabled": false,
+			"autoApprove": []
+		},
+		"fetch": {
+			"command": "node",
+			"args": [
+				"D:/Code/Tools/fetch-mcp/dist/index.js"
+			]
+		},
+		"roo-code-memory-bank-mcp": {
+			"autoApprove": [
+				"initialize_memory_bank",
+				"check_memory_bank_status",
+				"read_memory_bank_file",
+				"append_memory_bank_entry"
+			],
+			"disabled": false,
+			"timeout": 60,
+			"command": "node",
+			"args": [
+				"D:/Code/Tools/roo-code-memory-bank-mcp-server/dist/index.js"
+			],
+			"env": {},
+			"transportType": "stdio"
+		},
+		"taskmaster-ai": {
+			"command": "cmd",
+			"args": [
+				"/c",
+				"npx",
+				"-y",
+				"--package=task-master-ai",
+				"task-master-ai"
+			],
+			"env": {
+				"GOOGLE_API_KEY": "AIzaSyBBI4fOIoqYyiRDyydlj5BBtuhYYDJKcjw",
+				"OPENROUTER_API_KEY": "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",
+				"XAI_API_KEY": "xai-K3MbNMFZ0p0hWR1UllbRrE4KpyCmqGLiPZKyei1cudFyyYfXx7OpbjegaPRWdzfUuPypzk5FiNsb6FZF",
+				"OLLAMA_API_KEY": "YOUR_OLLAMA_API_KEY_HERE"
+			}
+		}
+	}
+}

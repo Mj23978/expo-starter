@@ -25,7 +25,7 @@ function TooltipContent({
           entering={Platform.select({ web: undefined, default: FadeIn })}
           exiting={Platform.select({ web: undefined, default: FadeOut })}
         >
-          <TextClassContext.Provider value='text-sm native:text-base text-popover-foreground'>
+          <TextClassContext.Provider value="text-sm native:text-base text-popover-foreground">
             <TooltipPrimitive.Content
               sideOffset={sideOffset}
               className={cn(

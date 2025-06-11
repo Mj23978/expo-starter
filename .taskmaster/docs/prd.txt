@@ -1,35 +1,224 @@
-<context>
-# Overview
-Our product is a mobile app for tracking daily habits and goals. It helps users build positive routines and track their progress over time. It's valuable for anyone looking to improve their productivity and well-being.
-</context>
+Okay, here's a Product Requirements Document (PRD) for your simple local task manager app built with Expo, following the structure you provided.
+
 <PRD>
-# Technical Architecture
-We want to use React Native with Expo for the mobile app, convex for authentication and database, and Tailwind CSS for styling with NativeWind 4. We need APIs for user data and habit tracking, and we want to ensure data security with proper authentication and encryption.
 
-# Development Roadmap
-We need to ensure that the backend services are in place before implementing the front-end features that depend on them. We should prioritize the core features first, then add social sharing and analytics as secondary features. The development roadmap should start with user authentication, then habit tracking, followed by goal setting and progress visualization. We want to get to a usable front end as quickly as possible.
+# **Product Requirements Document: Local TaskMaster**
 
-# Logical Dependency Chain
-The logical order of development should follow the roadmap, ensuring that foundational features are completed before building upon them. This includes:
-- User authentication
-- Habit tracking
-- Goal setting
-- Progress visualization
-- Social sharing
-- Analytics and insights
-- Push notifications
+## **1. Overview**
 
-# Risks and Mitigations
-Potential risks include integrating convex with React Native and ensuring data security for user habits and goals. We'll need to address these with proper authentication and encryption. There's also a risk of user data loss or corruption, which we'll mitigate with regular backups and data recovery procedures.
+**Local TaskMaster** is a simple, mobile-first task management application designed for individuals who need a straightforward way to organize their daily to-dos without relying on cloud services or internet connectivity. It solves the problem of needing a quick, private, and always-accessible place to jot down, track, and manage personal tasks. The app is for anyone seeking a no-frills, offline task list on their mobile device. Its value lies in its simplicity, privacy (all data is local), and offline functionality, ensuring users can manage their tasks anytime, anywhere.
 
-# Appendix
-## Core Features
-- User authentication
-- Habit tracking
-- Goal setting
-- Progress visualization
-- Reminders
-- Social sharing
-- Analytics and insights
-- Push notifications
+## **2. Core Features**
+
+1.  **Add Task:**
+    *   **What it does:** Allows users to create and add new tasks to their list.
+    *   **Why it's important:** This is the fundamental action for populating the task list.
+    *   **How it works at a high level:** User taps an "Add" button, is presented with an input field for the task title (and optionally, a description), and upon saving, the new task appears in the main task list and is saved to local storage.
+
+2.  **View Task List:**
+    *   **What it does:** Displays all currently active tasks.
+    *   **Why it's important:** Users need to see their pending tasks to manage them effectively.
+    *   **How it works at a high level:** On app launch, tasks are loaded from local storage and displayed in a scrollable list. Each task item will show its title and potentially a visual indicator of completion status.
+
+3.  **Edit Task:**
+    *   **What it does:** Allows users to modify the details (e.g., title, description) of an existing task.
+    *   **Why it's important:** Task details can change, or mistakes might need correction.
+    *   **How it works at a high level:** User selects a task from the list, is taken to an edit screen/modal pre-filled with the task's current details. After making changes and saving, the task is updated in the list and local storage.
+
+4.  **Delete Task:**
+    *   **What it does:** Allows users to remove tasks from their list.
+    *   **Why it's important:** To clear completed or no-longer-relevant tasks, keeping the list manageable.
+    *   **How it works at a high level:** User selects a task (e.g., via a swipe gesture or a button within the task detail view) and confirms deletion. The task is removed from the list and local storage.
+
+5.  **Mark Task as Complete/Incomplete:**
+    *   **What it does:** Allows users to toggle the completion status of a task.
+    *   **Why it's important:** Essential for tracking progress and differentiating finished tasks from pending ones.
+    *   **How it works at a high level:** Each task item will have a checkbox or similar UI element. Tapping it toggles the `isCompleted` status of the task, updates its visual representation in the list, and saves the change to local storage.
+
+6.  **Local Data Persistence:**
+    *   **What it does:** Ensures that all tasks created, edited, or deleted by the user are saved locally on the device.
+    *   **Why it's important:** User data must persist between app sessions. If the user closes and reopens the app, their tasks should be exactly as they left them.
+    *   **How it works at a high level:** The application will use Expo's `AsyncStorage` (or a similar local storage mechanism) to store the task data as a JSON string. Data is loaded on app start and saved after any CRUD (Create, Read, Update, Delete) operation.
+
+## **3. User Experience**
+
+*   **User Personas:**
+    *   **Busy Brian:** A student or professional who needs to quickly jot down tasks on the go and check them off. Values speed and simplicity. Doesn't want complex features.
+    *   **Organized Olivia:** Someone who likes to keep a neat list of personal errands and reminders. Appreciates a clean interface and the ability to easily edit tasks if plans change. Values privacy and offline access.
+
+*   **Key User Flows:**
+    1.  **Adding a New Task:**
+        *   User opens app -> Sees task list (or empty state).
+        *   User taps "Add Task" button.
+        *   User enters task title in an input field.
+        *   User taps "Save."
+        *   User sees the new task appear in the task list.
+    2.  **Completing a Task:**
+        *   User opens app -> Sees task list.
+        *   User finds the task they want to complete.
+        *   User taps the "Mark as Complete" checkbox next to the task.
+        *   Task visually changes (e.g., strikethrough, dimmed) to indicate completion.
+    3.  **Editing an Existing Task:**
+        *   User opens app -> Sees task list.
+        *   User taps on the task they want to edit.
+        *   User is navigated to an "Edit Task" screen with current details pre-filled.
+        *   User modifies the task title/description.
+        *   User taps "Save."
+        *   User is returned to the task list and sees the updated task.
+    4.  **Deleting a Task:**
+        *   User opens app -> Sees task list.
+        *   User finds the task to delete.
+        *   User swipes left on the task (or taps a delete icon in an edit view).
+        *   User confirms deletion (optional, but good practice).
+        *   Task is removed from the list.
+
+*   **UI/UX Considerations:**
+    *   **Minimalist Design:** Clean, uncluttered interface. Focus on functionality.
+    *   **Clear CTAs:** Obvious "Add Task" button (e.g., a floating action button).
+    *   **Intuitive Gestures:** Consider swipe-to-delete or swipe-to-edit options for quick actions.
+    *   **Visual Feedback:** Provide immediate visual confirmation for actions like adding, completing, or deleting tasks.
+    *   **Empty State:** A helpful message or graphic when the task list is empty (e.g., "No tasks yet! Tap '+' to add one.").
+    *   **Readability:** Clear typography and sufficient contrast for task items.
+    *   **Performance:** Smooth scrolling even with a moderate number of tasks.
+
+## **4. Technical Architecture**
+
+*   **System Components:**
+    *   **Frontend:** Expo (React Native) application.
+        *   UI Components: Standard React Native components (`View`, `Text`, `TextInput`, `Button`, `FlatList`, `TouchableOpacity`, `Modal`).
+        *   Navigation: `@react-navigation/native` and `@react-navigation/stack` for screen transitions (e.g., from task list to add/edit screen).
+    *   **Local Storage:**
+        *   `AsyncStorage` (from `@react-native-async-storage/async-storage`): For persisting task data locally on the device.
+
+*   **Data Models:**
+    *   **Task Object:**
+        ```json
+        {
+          "id": "string", // Unique identifier (e.g., UUID or timestamp-based)
+          "title": "string", // The main text of the task
+          "description": "string", // Optional: more details about the task
+          "isCompleted": "boolean", // True if completed, false otherwise
+          "createdAt": "ISO8601_string", // Timestamp of creation
+          "updatedAt": "ISO8601_string" // Timestamp of last update
+        }
+        ```
+    *   **Storage Structure:** Tasks will be stored as an array of Task Objects, serialized to a JSON string in `AsyncStorage` under a specific key (e.g., `'@LocalTaskMaster:tasks'`).
+
+*   **APIs and Integrations:**
+    *   None. All operations are local to the device.
+
+*   **Infrastructure Requirements:**
+    *   None beyond the user's mobile device.
+
+## **5. Development Roadmap**
+
+*   **MVP Requirements (Phase 1):**
+    1.  **Basic App Setup & Navigation:**
+        *   Initialize Expo project.
+        *   Set up basic navigation with a main Task List screen and an Add/Edit Task screen (can be a modal or separate screen).
+    2.  **Task Data Structure & Local Storage Wrapper:**
+        *   Define the `Task` object structure.
+        *   Create utility functions to `getTasks`, `saveTasks`, `addTask`, `updateTask`, `deleteTask` that interact with `AsyncStorage` (serializing/deserializing the task array).
+    3.  **Display Task List:**
+        *   Implement the Task List screen.
+        *   Fetch tasks from `AsyncStorage` on component mount and display them using `FlatList`.
+        *   Handle the empty state (no tasks).
+    4.  **Add New Task Functionality:**
+        *   Implement the Add Task screen/modal with an input field for the task `title`.
+        *   On save, create a new task object (generate ID, set `createdAt`, `isCompleted: false`).
+        *   Save the updated task array to `AsyncStorage`.
+        *   Navigate back and refresh the Task List.
+    5.  **Mark Task as Complete/Incomplete:**
+        *   Add a checkbox or tappable icon to each task item in the `FlatList`.
+        *   Toggling this updates the `isCompleted` status of the task in the state and `AsyncStorage`.
+        *   Visually distinguish completed tasks (e.g., strikethrough text).
+    6.  **Delete Task Functionality:**
+        *   Implement a way to delete tasks (e.g., a delete button per item, or a swipe gesture).
+        *   On deletion, remove the task from the state and `AsyncStorage`.
+        *   Refresh the Task List.
+
+*   **Future Enhancements (Phase 2 and beyond):**
+    1.  **Edit Task Functionality (Dedicated Screen):**
+        *   Allow tapping a task to navigate to a dedicated Edit Task screen pre-filled with its `title` (and `description` if added).
+        *   Save changes to `AsyncStorage` and update the list.
+    2.  **Task Description Field:**
+        *   Add an optional `description` field to the Task object and UI for adding/editing tasks.
+        *   Display description (perhaps truncated or on a detail view).
+    3.  **Improved UI/UX:**
+        *   Refine styling, add icons.
+        *   Implement smoother animations or transitions.
+        *   Confirmation dialog for delete.
+    4.  **Sorting Tasks:**
+        *   Allow sorting tasks (e.g., by creation date, by completion status).
+    5.  **Filtering Tasks:**
+        *   Allow filtering tasks (e.g., show only active, show only completed).
+    6.  **Basic Theming:** (e.g., Light/Dark mode based on system preference)
+
+## **6. Logical Dependency Chain**
+
+1.  **Foundation (Must be built first):**
+    *   Expo project initialization.
+    *   Install core dependencies (`@react-navigation/native`, `@react-navigation/stack`, `@react-native-async-storage/async-storage`).
+    *   Define the `Task` data model.
+    *   Implement basic `AsyncStorage` helper functions (loadTasks, saveTasks). Even if they just log to console initially, the interface is key.
+2.  **Core Visibility & Interaction (Getting something usable/visible quickly):**
+    *   Set up basic navigation: a `TaskListScreen` and an `AddTaskScreen` (can be the same screen logic initially for MVP if using a modal).
+    *   `TaskListScreen`:
+        *   Attempt to load tasks from `AsyncStorage` (even if it's an empty array initially).
+        *   Render a `FlatList` of tasks. If no tasks, show an "empty state" message.
+        *   Implement a simple "Add Task" button that navigates to `AddTaskScreen`.
+    *   `AddTaskScreen`:
+        *   A `TextInput` for the task title and a "Save" button.
+        *   On "Save," create a new task object, add it to an in-memory array (representing the tasks), and navigate back. (Persistence to `AsyncStorage` can be wired up next).
+3.  **Connecting Logic & Persistence (Making it work end-to-end):**
+    *   **Persistence for Add:** Modify `AddTaskScreen`'s "Save" to use the `AsyncStorage` helper to save the *entire updated list* of tasks. Ensure `TaskListScreen` re-reads from `AsyncStorage` or updates its state when it becomes active again.
+    *   **Mark as Complete:** Add a checkbox/button to each task item in `TaskListScreen`. Tapping it should:
+        *   Update the `isCompleted` status of that task in the in-memory array.
+        *   Visually update the item (e.g., strikethrough).
+        *   Use the `AsyncStorage` helper to save the entire updated list.
+    *   **Delete Task:** Add a delete button/mechanism to each task item. Tapping it should:
+        *   Remove the task from the in-memory array.
+        *   Use the `AsyncStorage` helper to save the entire updated list.
+        *   Visually remove the item from the `FlatList`.
+4.  **Refinement & Further Features (Building upon the working base):**
+    *   **Edit Task:**
+        *   Create an `EditTaskScreen` (or reuse `AddTaskScreen` logic).
+        *   When a task in `TaskListScreen` is tapped, navigate to `EditTaskScreen`, passing the task `id` or the whole task object.
+        *   Pre-fill the `TextInput` with the existing task title.
+        *   On "Save," update the corresponding task in the in-memory array and save the entire list to `AsyncStorage`.
+    *   **Task Description:** If adding descriptions, update the data model, `AddTaskScreen`, `EditTaskScreen`, and how tasks are displayed in `TaskListScreen`.
+    *   **UI Polish:** Improve styling, add icons, confirmation dialogs, etc.
+
+## **7. Risks and Mitigations**
+
+*   **Technical Challenges:**
+    *   **`AsyncStorage` Data Management:** Ensuring data integrity when reading/writing, especially if app crashes during an operation (less likely with simple array writes, but a consideration).
+        *   *Mitigation:* Keep write operations atomic where possible. Serialize/deserialize robustly (JSON.stringify/parse with try-catch). For this simple app, direct array overwrites are likely fine.
+    *   **State Management Complexity:** As features grow, managing React state across screens can become complex.
+        *   *Mitigation:* Start with simple prop drilling or React Context API. If complexity significantly increases, consider a lightweight state management library (though likely overkill for this specific "simple app" request). Focus on clear component responsibilities.
+*   **Figuring out the MVP that we can build upon:**
+    *   **Risk of Scope Creep:** Tendency to add "just one more small feature" to the MVP.
+        *   *Mitigation:* Strictly adhere to the defined MVP features (Add, View, Complete, Delete, Persist). Editing can be a very fast follow-up but keep it out of the absolute first usable version if pressed for minimality.
+    *   **Risk of Over-engineering MVP:** Building overly complex solutions for simple problems.
+        *   *Mitigation:* Prioritize simplicity. Use standard Expo/React Native components and `AsyncStorage` directly. Avoid premature optimization.
+*   **Resource Constraints (Assuming solo developer, time is the main constraint):**
+    *   **Time to implement all desired MVP features:**
+        *   *Mitigation:* Focus on the logical dependency chain. Get a visual front-end with basic add/view working first, then layer in persistence and other CRUD operations. This provides early tangible progress.
+    *   **Debugging local storage issues:**
+        *   *Mitigation:* Utilize `console.log` extensively during development to inspect data being saved/loaded. Use Expo DevTools if available for inspecting AsyncStorage.
+
+## **8. Appendix**
+
+*   **Research Findings:**
+    *   `AsyncStorage` is the de-facto standard for simple key-value persistence in React Native/Expo.
+    *   For more complex local data needs (relationships, querying), `expo-sqlite` would be an alternative, but is overkill for this project's scope.
+*   **Key Dependencies:**
+    *   `expo`
+    *   `react`
+    *   `react-native`
+    *   `@react-native-async-storage/async-storage`
+    *   `@react-navigation/native`
+    *   `@react-navigation/stack`
+    *   Optionally: `uuid` for generating unique IDs (or use timestamps).
+
 </PRD>

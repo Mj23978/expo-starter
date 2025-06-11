@@ -1,7 +1,7 @@
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 import * as React from 'react';
-import { Pressable } from 'react-native';
-import { TextClassContext } from '~/components/ui/text';
+import { GestureResponderEvent, Pressable } from 'react-native';
+import { Text, TextClassContext } from '~/components/ui/text';
 import { cn } from '~/lib/utils';
 
 const buttonVariants = cva(
@@ -59,18 +59,31 @@ const buttonTextVariants = cva(
 
 type ButtonProps = React.ComponentProps<typeof Pressable> & VariantProps<typeof buttonVariants>;
 
-function Button({ ref, className, variant, size, ...props }: ButtonProps) {
+function Button({
+  ref,
+  className,
+  variant,
+  size,
+  ...props
+}: ButtonProps & {
+  onClick: ((event: GestureResponderEvent) => void) | null | undefined;
+}) {
   return (
     <TextClassContext.Provider
-      value={buttonTextVariants({ variant, size, className: 'web:pointer-events-none' })}
+      value={buttonTextVariants({
+        variant,
+        size,
+        className: "web:pointer-events-none",
+      })}
     >
       <Pressable
         className={cn(
-          props.disabled && 'opacity-50 web:pointer-events-none',
+          props.disabled && "opacity-50 web:pointer-events-none",
           buttonVariants({ variant, size, className })
         )}
         ref={ref}
-        role='button'
+        role="button"
+        onPress={props.onPress ?? props.onClick}
         {...props}
       />
     </TextClassContext.Provider>
