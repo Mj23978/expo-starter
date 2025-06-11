@@ -18,16 +18,22 @@
     "format:fix": "prettier --check --write ./",
     "build:prebuild": "expo prebuild",
     "clean": "rimraf node_modules && rimraf yarn.lock && rimraf package-log.json && yarn install",
-    "build:dev:android": "APP_ENV=development build --profile development --platform android",
-    "build:dev:android:local": "APP_ENV=development eas build --profile development --platform android --local --output ~/projects/buildsMy/rnr-starter/dev.apk",
-    "build:preview:android": "eas build --profile preview --platform android",
-    "build:preview:android:local": "eas build --profile preview --platform android --local --output ~/projects/buildsMy/rnr-starter/prev.apk",
-    "build:prod:android": "eas build --profile production --platform android",
-    "build:prod:android:local": "eas build --profile production --platform android --local --output ~/projects/buildsMy/rnr-starter/prod.apk",
-    "build:dev:ios": "APP_ENV=development eas build --profile development --platform ios",
-    "build:dev:ios:local": "APP_ENV=development eas build --profile development --platform ios --local --output ~/projects/buildsMy/rnr-starter/dev.tgz",
-    "build:preview:ios": "APP_ENV=preview eas build --profile preview --platform ios",
-    "build:prod:ios": "APP_ENV=production eas build --profile production --platform ios",
+    "preinstall": "npx only-allow pnpm",
+    "start:staging": "cross-env APP_ENV=staging pnpm run start",
+    "prebuild:staging": "cross-env APP_ENV=staging pnpm run prebuild",
+    "prebuild:development": "cross-env APP_ENV=development pnpm run prebuild",
+    "android:staging": "cross-env APP_ENV=staging pnpm run android",
+    "ios:staging": "cross-env APP_ENV=staging pnpm run ios",
+    "start:production": "cross-env APP_ENV=production pnpm run start",
+    "prebuild:production": "cross-env APP_ENV=production pnpm run prebuild",
+    "android:production": "cross-env APP_ENV=production pnpm run android",
+    "ios:production": "cross-env APP_ENV=production pnpm run ios",
+    "build:development:ios": "cross-env APP_ENV=development EXPO_NO_DOTENV=1 eas build --profile development --platform ios",
+    "build:development:android": "cross-env APP_ENV=development EXPO_NO_DOTENV=1 eas build --profile development --platform android ",
+    "build:staging:ios": "cross-env APP_ENV=staging EXPO_NO_DOTENV=1 eas build --profile staging --platform ios",
+    "build:staging:android": "cross-env APP_ENV=staging EXPO_NO_DOTENV=1 eas build --profile staging --platform android ",
+    "build:production:ios": "cross-env APP_ENV=production EXPO_NO_DOTENV=1 eas build --profile production --platform ios",
+    "build:production:android": "cross-env APP_ENV=production EXPO_NO_DOTENV=1 eas build --profile production --platform android ",
     "eas:submit:android": "eas submit --platform android",
     "eas:submit:ios": "eas submit --platform ios",
     "expo:eject": "expo eject",
@@ -117,14 +123,21 @@
     "@babel/core": "^7.26.0",
     "@biomejs/biome": "^1.9.4",
     "@types/react": "~19.0.14",
+    "cross-env": "^7.0.3",
     "knip": "^5.42.2",
     "typescript": "^5.8.3"
   },
+  "packageManager": "pnpm@9.12.3",
   "expo": {
     "doctor": {
       "reactNativeDirectoryCheck": {
         "listUnknownPackages": false
       }
+    },
+    "install": {
+      "exclude": [
+        "eslint-config-expo"
+      ]
     }
   }
 }
