@@ -1,6 +1,5 @@
 {
   "expo": {
-    "jsEngine": "hermes",
     "name": "Todo App",
     "slug": "starter-todo",
     "version": "1.0.0",

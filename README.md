@@ -11,6 +11,18 @@ A starting point to help you set up your project quickly and use the common comp
 - Common components
   - ThemeToggle, Avatar, Button, Card, Progress, Text, Tooltip
 
-<img src="https://github.com/mrzachnugent/react-native-reusables/assets/63797719/42c94108-38a7-498b-9c70-18640420f1bc"
+<img src="https://github.com/Mj23978/expo-starter/docs/1.png"
      alt="starter-base-template"
-     style="width:270px;" />
+     style="width:200px;" />
+<img src="https://github.com/Mj23978/expo-starter/docs/2.png"
+     alt="starter-base-template"
+     style="width:200px;" />
+<img src="https://github.com/Mj23978/expo-starter/docs/3.png"
+     alt="starter-base-template"
+     style="width:200px;" />
+<img src="https://github.com/Mj23978/expo-starter/docs/4.png"
+     alt="starter-base-template"
+     style="width:200px;" />
+<img src="https://github.com/Mj23978/expo-starter/docs/5.png"
+     alt="starter-base-template"
+     style="width:200px;" />

@@ -12,16 +12,13 @@
       },
       "android": {
         "buildType": "apk"
-      },
-      "ios": {
-        "simulator": true
       }
     },
-    "preview": {
+    "staging": {
       "distribution": "internal",
       "env": {
-        "APP_ENV": "preview",
-        "NODE_ENV": "preview"
+        "APP_ENV": "staging",
+        "NODE_ENV": "staging"
       },
       "android": {
         "buildType": "apk"
@@ -34,9 +31,6 @@
       },
       "android": {
         "buildType": "app-bundle"
-      },
-      "ios": {
-        "resourceClass": "m-medium"
       }
     }
   }
