@@ -1,5 +1,5 @@
 {
-  "name": "expo-todo",
+  "name": "todoapp",
   "main": "expo-router/entry",
   "version": "1.1.0",
   "description": "A comprehensive React Native Expo boilerplate with 50+ modern UI components, dark/light themes, i18n, state management, and production-ready architecture",
